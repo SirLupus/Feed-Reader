@@ -132,7 +132,10 @@ class main_listener implements EventSubscriberInterface
 			$ext_path					= $this->phpbb_extension_manager->get_extension_path('oxpus/feed', true);
 			$this->phpbb_path_helper	= $this->phpbb_container->get('path_helper');
 	
-			define('SFNC_FEEDS', $this->table_prefix . 'sfnc_feeds');
+			if (!defined('SFNC_FEEDS'))
+			{
+				define('SFNC_FEEDS', $this->table_prefix . 'sfnc_feeds');
+			}
 	
 			include_once($ext_path . 'helpers/sfnc_class.' . $this->php_ext);
 			$sfnc = new \oxpus\feed\helpers\ sfnc_class();
@@ -155,6 +158,11 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($this->config['sfnc_ticker_position'])
 		{
+			if (!defined('SFNC_FEEDS'))
+			{
+				define('SFNC_FEEDS', $this->table_prefix . 'sfnc_feeds');
+			}
+
 			$sql = 'SELECT id FROM ' . SFNC_FEEDS . '
 					WHERE enabled_displaying = 1';
 			$result = $this->db->sql_query($sql);
