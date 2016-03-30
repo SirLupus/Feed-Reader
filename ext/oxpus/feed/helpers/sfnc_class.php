@@ -617,6 +617,7 @@ class sfnc_class
 
 		// require necessary functions for posting
 		require_once($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
+		require_once ($phpbb_root_path . 'includes/functions_content.' . $phpEx);
 
 		if (!$this->poster_id)
 		{
